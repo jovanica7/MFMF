@@ -1,0 +1,39 @@
+<div class="profile-container">
+  <h2>Employee profile (Angular Container app)</h2>
+        <form [formGroup]="form">
+          <div>
+            <input
+              type="text"
+              formControlName="name"
+              placeholder="Name"
+              data-e2e="FORM_FIELD__NAME"
+              #name
+            />
+            <div *ngIf="form.controls['name']?.invalid && (form.controls['name']?.dirty || form.controls['name']?.touched)" class="alert alert-danger">
+              <div *ngIf="form.controls['name']?.errors?.['required']">
+                Name is required.
+              </div>
+            </div>
+          </div>
+          <div>
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="Email"
+              data-e2e="FORM_FIELD__EMAIL"
+              #email
+            />
+            <div *ngIf="form.controls['email']?.invalid && form.controls['email']?.dirty || form.controls['email']?.touched" class="alert alert-danger">
+              <div *ngIf="form.controls['email']?.errors?.['required']">
+                Email is required.
+              </div>
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-primary" (click)="addEmployee(name.value, email.value)"
+                [disabled]="form.pristine || form.invalid">Create Employee</button>
+          </div>
+        </form>
+    <br />
+    <app-employee-list></app-employee-list>
+</div>

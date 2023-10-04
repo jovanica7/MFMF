@@ -1,14 +1,20 @@
-const { shareAll, withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
+const { withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
+const deps = require('../../package.json').dependencies;
 
 module.exports = withModuleFederationPlugin({
-
   remotes: {
-    // "shell": "http://localhost:4200/remoteEntry.js",    
-    "employee_list": `employee_list@http://localhost:3002/remoteEntry.js`
+    "react_remote": "http://localhost:3000/remoteEntry.js"
   },
 
   shared: {
-    ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
+    react: {
+      singleton: true,
+      requiredVersion: deps.react,
+    },
+    'react-dom/client': {
+      singleton: true,
+      requiredVersion: deps['react-dom'],
+    },
   },
 
 });

@@ -9,9 +9,9 @@ import { loadRemoteModule } from './utils/federation-utils';
 export function initializeApp(): () => void {
   return () => {
     loadRemoteModule({
-      remoteEntry: 'http://localhost:3002/remoteEntry.js',
-      remoteName: 'employee-list',
-      exposedModule: './EmployeeListReactComponent',
+      remoteEntry: 'http://localhost:3000/remoteEntry.js',
+      remoteName: 'react_remote',
+      exposedModule: './EmployeeListReactComponent'
     });
   };
 }

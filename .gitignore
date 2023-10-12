@@ -8,6 +8,8 @@
 
 # Node
 /node_modules
+/projects/angular-container-app/node_modules
+/projects/react-remote-app/node_modules
 npm-debug.log
 yarn-error.log
 

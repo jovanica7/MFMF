@@ -1,30 +1,39 @@
-const { ModuleFederationPlugin } = require('webpack').container;
+import { container } from 'webpack';
+const { ModuleFederationPlugin } = container;
 
-const deps = require('./package.json').dependencies;
+import { dependencies as deps } from './package.json';
 
-module.exports = {
-  mode: 'development',
-  devServer: {
-    port: 3000,
-    hot: true,
+export const entry = './src/index';
+export const mode = 'development';
+export const devServer = {
+  port: 3000,
+  hot: true,
+  headers: {
+    "Access-Control-Allow-Origin": "*"
   },
-  plugins: [
-    new ModuleFederationPlugin({
-      name: 'react_remote',
-      filename: 'remoteEntry.js',
-      exposes: {
-        './EmployeeListComponent': './src/EmployeeListComponent',
-      },
-      shared: {
-        react: {
-          singleton: true,
-          requiredVersion: deps.react,
-        },
-        'react-dom': {
-          singleton: true,
-          requiredVersion: deps['react-dom'],
-        },
-      },
-    }),
-  ],
 };
+export const resolve = {
+  extensions: ['.js', '.tsx', '.ts']
+};
+export const output = {
+  publicPath: 'auto'
+};
+export const plugins = [
+  new ModuleFederationPlugin({
+    name: 'react_remote',
+    filename: 'remoteEntry.js',
+    exposes: {
+      './EmployeeListReactComponent': './src/EmployeeListReactComponent',
+    },
+    shared: {
+      react: {
+        singleton: true,
+        requiredVersion: deps.react,
+      },
+      'react-dom': {
+        singleton: true,
+        requiredVersion: deps['react-dom']
+      },
+    },
+  }),
+];

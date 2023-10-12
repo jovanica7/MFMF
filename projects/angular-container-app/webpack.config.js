@@ -19,7 +19,7 @@ module.exports = {
       name: 'angular-container-app',
       filename: 'remoteEntry.js',
       remotes: {
-        list_user: `react_remote@http://localhost:3002/remoteEntry.js`,
+        react_remote: `react_remote@http://localhost:3000/remoteEntry.js`,
       },
       shared: {
         react: {
